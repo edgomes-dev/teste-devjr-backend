@@ -7,6 +7,7 @@ import {
 import { InjectRepository } from '@nestjs/typeorm';
 import { CategoryEntity } from 'src/category/category.entity';
 import { Repository } from 'typeorm';
+import { CreateProductDto } from './dto/createProductDto';
 import { ProductEntity } from './product.entity';
 
 @Injectable()
@@ -18,33 +19,41 @@ export class ProductService {
     private categoryRepository: Repository<CategoryEntity>,
   ) {}
 
-  async create(product: ProductEntity): Promise<ProductEntity> {
+  async create(productDto: CreateProductDto): Promise<ProductEntity> {
     const productFound = await this.productRepository.findOne({
       where: {
-        name: product.name,
+        name: productDto.name,
       },
     });
 
     if (productFound) {
       throw new BadRequestException(
-        `produto com esse nome ${product.name} já cadastrado`,
+        `produto com esse nome ${productDto.name} já cadastrado`,
       );
     }
 
-    const categoryFound = this.categoryRepository.findOne({
-      where: {
-        id: product.category.id,
+    const categoryFound: CategoryEntity = await this.categoryRepository.findOne(
+      {
+        where: {
+          id: productDto.category,
+        },
       },
-    });
+    );
 
     if (!categoryFound) {
       throw new NotFoundException(
-        `essa categoria ${product.category} não foi encotrada`,
+        `essa categoria ${productDto.category} não foi encotrada`,
       );
     }
 
+    const productEntity: ProductEntity = new ProductEntity();
+
+    productEntity.name = productDto.name;
+    productEntity.quantity = productDto.quantity;
+    productEntity.category = categoryFound;
+
     try {
-      return await this.productRepository.save(product);
+      return await this.productRepository.save(productEntity);
     } catch (error) {
       throw new ServiceUnavailableException(
         'não possível cadastrar o produto agora, tente novamente mais tarde',
@@ -64,6 +73,9 @@ export class ProductService {
     const productFound = await this.productRepository.findOne({
       where: {
         id,
+      },
+      relations: {
+        category: true,
       },
     });
 

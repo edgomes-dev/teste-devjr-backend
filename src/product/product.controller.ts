@@ -7,6 +7,7 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
+import { CreateProductDto } from './dto/createProductDto';
 import { ProductEntity } from './product.entity';
 import { ProductService } from './product.service';
 
@@ -19,8 +20,8 @@ export class ProductController {
   constructor(private productService: ProductService) {}
 
   @Post()
-  async Create(@Body() produt: ProductEntity): Promise<ProductEntity> {
-    return await this.productService.create(produt);
+  async Create(@Body() produtDto: CreateProductDto): Promise<ProductEntity> {
+    return await this.productService.create(produtDto);
   }
 
   @Get()
