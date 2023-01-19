@@ -26,12 +26,12 @@ export class ProductEntity {
   @ManyToOne(() => CategoryEntity, (category) => category.products)
   category: CategoryEntity;
 
-  @CreateDateColumn()
-  created_at: string;
+  @CreateDateColumn({ name: 'created_at' })
+  createdAt: string;
 
-  @UpdateDateColumn()
-  updated_at: string;
+  @UpdateDateColumn({ name: 'updated_at' })
+  updatedAt: string;
 
-  @DeleteDateColumn()
-  deleted_at: string;
+  @DeleteDateColumn({ name: 'deleted_at' })
+  deletedAt: string;
 }

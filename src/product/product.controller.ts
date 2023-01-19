@@ -14,7 +14,7 @@ type idType = {
   id: string;
 };
 
-@Controller('api/v1/product')
+@Controller('/product')
 export class ProductController {
   constructor(private productService: ProductService) {}
 
