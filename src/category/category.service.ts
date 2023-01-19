@@ -1,13 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { ProductEntity } from 'src/product/product.entity';
 import { Repository } from 'typeorm';
 import { CategoryEntity } from './category.entity';
 
 @Injectable()
 export class CategoryService {
   constructor(
-    @InjectRepository(CategoryService)
+    @InjectRepository(CategoryEntity)
     private categoryRepository: Repository<CategoryEntity>,
   ) {}
 
@@ -16,6 +15,10 @@ export class CategoryService {
   }
 
   async findAll(): Promise<CategoryEntity[]> {
-    return await this.categoryRepository.find();
+    return await this.categoryRepository.find({
+      relations: {
+        products: true,
+      },
+    });
   }
 }
