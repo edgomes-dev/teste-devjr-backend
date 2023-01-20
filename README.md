@@ -1,73 +1,168 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Teste backend jr
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+* Essa é uma aplicação desenvolvida em Nest com Typeorm para um teste técnico.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Teste o app
 
-## Description
+### requisitos
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- Node instalado na máquina
+- Insomnia ou Postman para testar os endpoint
 
-## Installation
+#### instale o projeto na sua máquina
+
+* Vá até a pasta que você quer instalar e no terminal insira esse comando.
 
 ```bash
-$ npm install
+ git clone https://github.com/edgomes-dev/teste-devjr-backend.git
 ```
 
-## Running the app
+#### Entre na pasta do projeto e instale as dependências
 
 ```bash
-# development
-$ npm run start
+ cd teste-devjr-backend
 
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+# instalando as depências necessárias
+ npm i
 ```
 
-## Test
+#### Agora inicie a aplicação
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+ npm run start:dev
 ```
 
-## Support
+#### Testando os nossos endpoint
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+* Com nossa aplicação instalada vamos testar nossas requisições.
+* Abra o postman ou insomnia
+* Crie duas pastar, uma product e outra category.
 
-## Stay in touch
+## Category
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+#### Create - POST
 
-## License
+- Criando uma categoria
 
-Nest is [MIT licensed](LICENSE).
+- url da requisição
+```
+ http://localhost:8080/api/v1/category
+```
+
+- Esse é o corpo da nossa requisição
+
+```
+{
+    "name": "eletrônicos"
+}
+```
+
+#### FindAll - GET
+
+* Iremos retornar todas as nossas categorias
+
+```
+ http://localhost:8080/api/v1/category
+```
+
+#### FindById - GET
+
+* Iremos retornar uma categoria pelo seu id
+
+```
+ http://localhost:8080/api/v1/category/1
+```
+
+#### Update - Put
+
+- Atualizando uam categoria
+
+- url da requisição
+```
+ http://localhost:8080/api/v1/product
+```
+
+- Esse é o corpo da nossa requisição
+
+```
+{
+    "id": 1,
+    "name": "eletrônicos novo"
+}
+```
+
+#### Delete - DELETE
+
+* Iremos excluir uma categoria pelo seu id
+
+```
+ http://localhost:8080/api/v1/category/1
+```
+
+
+## Product
+
+#### Create - POST
+
+- Criando um produto
+
+- url da requisição
+```
+ http://localhost:8080/api/v1/product
+```
+
+- Esse é o corpo da nossa requisição
+
+```
+{
+    "name": "woody",
+    "status": true,
+    "quantity": 10,
+    "category": 2
+}
+```
+
+#### FindAll - GET
+
+* Iremos retornar todas os nossos produtos
+
+```
+ http://localhost:8080/api/v1/product
+```
+
+#### FindById - GET
+
+* Iremos retornar um produto pelo seu id
+
+```
+ http://localhost:8080/api/v1/product/1
+```
+
+#### Update - Put
+
+- Atualizando um produto
+
+- url da requisição
+```
+ http://localhost:8080/api/v1/product
+```
+
+- Esse é o corpo da nossa requisição
+
+```
+{
+    "id": 1,
+    "name": "notebook novo",
+    "status": true,
+    "quantity": 10,
+    "deleted_at": null
+}
+```
+
+#### Delete - DELETE
+
+* Iremos excluir um produto pelo seu id
+
+```
+ http://localhost:8080/api/v1/product/1
+```
